@@ -1,3 +1,5 @@
+import org.w3c.dom.events.MouseEvent;
+
 import processing.core.PApplet;
 
 public class Sketch extends PApplet {
@@ -13,10 +15,12 @@ public class Sketch extends PApplet {
   float fltScreenWidth = fltCellWidth * intColumnCount + (fltCellMargin * (intColumnCount+1));
   float fltScreenHeight = fltCellHeight* intRowCount + (fltCellMargin * (intRowCount+1));
 
-  int intmouseXInGrid = 0;
-  int intmouseYInGrid = 0; 
+  int intmouseXInGrid;
+  int intmouseYInGrid; 
 
   int [][] intGrid = new int[intRowCount][intColumnCount];
+
+  boolean boolGridPressed = false;
 
   /**
    * Called once at the beginning of execution, put your size all in this method
@@ -31,11 +35,8 @@ public class Sketch extends PApplet {
    * values here i.e background, stroke, fill etc.
    */
   public void setup() {
-    intGrid[5][1] = 1;
     background(0, 0, 0);
-    
 
-   
     }
 
 
@@ -46,8 +47,43 @@ public class Sketch extends PApplet {
   public void draw() {
     for(int column = 0; column < intColumnCount; column++){
       for (int row = 0; row < intRowCount; row++){
+        if (boolGridPressed && intmouseXInGrid == column && intmouseYInGrid == row){
+          if (column > 0 && row > 0 && row < intRowCount-1 && column < intColumnCount-1 && intGrid[intmouseXInGrid][intmouseYInGrid] == 0){
+            intGrid[intmouseXInGrid + 1][intmouseYInGrid] = 1;
+            intGrid[intmouseXInGrid][intmouseYInGrid+1] = 1;
+            intGrid[intmouseXInGrid][intmouseYInGrid-1] = 1;
+            intGrid[intmouseXInGrid - 1][intmouseYInGrid] = 1;
+            intGrid[intmouseXInGrid][intmouseYInGrid] = 1;
+            boolGridPressed = false;
+          }
+          else if (column > 0 && row > 0 && row < intRowCount-1 && column < intColumnCount-1 && intGrid[intmouseXInGrid][intmouseYInGrid] == 1){ 
+            cool
+            intGrid[intmouseXInGrid + 1][intmouseYInGrid] = 0;
+            intGrid[intmouseXInGrid][intmouseYInGrid+1] = 0;
+            intGrid[intmouseXInGrid][intmouseYInGrid-1] = 0;
+            intGrid[intmouseXInGrid - 1][intmouseYInGrid] = 0;
+            intGrid[intmouseXInGrid][intmouseYInGrid] = 0;
+            boolGridPressed = false;
+          }
+          if (column == 0){
+            intGrid[intmouseXInGrid + 1][intmouseYInGrid] = 1;
+            intGrid[intmouseXInGrid][intmouseYInGrid+1] = 1;
+            intGrid[intmouseXInGrid][intmouseYInGrid-1] = 1;
+            intGrid[intmouseXInGrid][intmouseYInGrid] = 1;
+            boolGridPressed = false;
+          }
+          if (intGrid[column][row] == 0){
+            intGrid[intmouseXInGrid][intmouseYInGrid] = 1;
+          }
+          else if (intGrid [column][row] == 1){
+            //intGrid[intMouseXInGrid]
+          }
 
-        intGrid[intmouseXInGrid][intmouseYInGrid] = 1;
+
+          
+        }
+    
+        
         if (intGrid[column][row] == 1){
           fill(0,128,0);
         }
@@ -71,9 +107,11 @@ public class Sketch extends PApplet {
       System.out.println(mouseX + mouseY);
       intmouseXInGrid = mouseX / (int)(fltCellWidth + fltCellMargin);
       intmouseYInGrid = mouseY / (int)(fltCellHeight + fltCellMargin);
+      boolGridPressed = true;
     }
     
 
     
   }
 }
+
