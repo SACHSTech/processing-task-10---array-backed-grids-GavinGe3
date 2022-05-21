@@ -22,8 +22,8 @@ public class Sketch extends PApplet {
   int fltScreenHeight = intCellHeight* intRowCount + (intCellMargin * (intRowCount+1));
 
   // Variables for mouse grid location 
-  int intmouseXInGrid;
-  int intmouseYInGrid; 
+  int intMouseXInGrid;
+  int intMouseYInGrid; 
   // Number of cells turned green
   int cellsSelected;
 
@@ -152,10 +152,10 @@ public class Sketch extends PApplet {
   public void mousePressed(){
     
       // converts mouse location to grid coordinates and prints it out
-      intmouseXInGrid = mouseX / (int)(intCellWidth + intCellMargin);
-      intmouseYInGrid = mouseY / (int)(intCellHeight + intCellMargin);
+      intMouseXInGrid = mouseX / (int)(intCellWidth + intCellMargin);
+      intMouseYInGrid = mouseY / (int)(intCellHeight + intCellMargin);
       System.out.println("click");
-      System.out.println("The Grid coordinates are (" + (intmouseXInGrid+1) + ", " + (intmouseYInGrid+1) + ").");
+      System.out.println("The Grid coordinates are (" + (intMouseXInGrid+1) + ", " + (intMouseYInGrid+1) + ").");
       System.out.println("The mouse coordinates are (" + mouseX + ", " + mouseY + ").");
 
       // Variable to determine if mouse is pressed
@@ -165,7 +165,7 @@ public class Sketch extends PApplet {
       // Changes the color of cell based on mousepressed location
       for(int row = 0; row < intColumnCount; row++){
         for (int column = 0; column < intRowCount; column++){
-          if (intmouseXInGrid == column && intmouseYInGrid == row){
+          if (intMouseXInGrid == column && intMouseYInGrid == row){
 
             // Center Cell
             if (intGrid[column][row] == 0){
