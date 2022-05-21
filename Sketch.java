@@ -87,7 +87,7 @@ public class Sketch extends PApplet {
         }
       }
       // Prints # of green cells in column and resets count
-      System.out.println("Column " + (column + 1) + " has " + intColumnSelectedCount + " boxes selected.");
+      System.out.println("Column " + (column + 1) + " has " + intColumnSelectedCount + " cells selected.");
       intColumnSelectedCount = 0;
     }
     // Determines number of selected blocks and continuous blocks in rows
@@ -115,7 +115,7 @@ public class Sketch extends PApplet {
         // Note: This code is for if we are counting all continuous chains of blocks not the longest chain of blocks in a row
 
         /**
-         * if (column < intColumnCount - 1){
+        if (column < intColumnCount - 1){
           if (intGrid[column][row] == 1 && intGrid[column+1][row] == 1){
             intContinuousCellCount++;
           }
@@ -133,11 +133,11 @@ public class Sketch extends PApplet {
 
     // prints number of selected blocks and continuous blocks in rows
     if (intRowCellSelectedMax > 2){
-      System.out.println("There are " + intRowCellSelectedMax + " continuous blocks selected in row " + (row+1) + ".");
+      System.out.println("There are " + intRowCellSelectedMax + " continuous cells selected in row " + (row+1) + ".");
       intRowCellSelectedMax = 0;
       intContinuousCellCount = 0;
     }
-    System.out.println("Row " + (row + 1) + " has " + intRowSelectedCount + " boxes selected.");
+    System.out.println("Row " + (row + 1) + " has " + intRowSelectedCount + " cells selected.");
     intRowSelectedCount = 0;
     }
     // Changes pressed variable to false
@@ -150,13 +150,16 @@ public class Sketch extends PApplet {
    * Detects if mouse is pressed and changes cell colors of array backged grid based on presses
    */
   public void mousePressed(){
+    
       // converts mouse location to grid coordinates and prints it out
       intmouseXInGrid = mouseX / (int)(intCellWidth + intCellMargin);
       intmouseYInGrid = mouseY / (int)(intCellHeight + intCellMargin);
       System.out.println("click");
       System.out.println("The Grid coordinates are (" + (intmouseXInGrid+1) + ", " + (intmouseYInGrid+1) + ").");
       System.out.println("The mouse coordinates are (" + mouseX + ", " + mouseY + ").");
+
       // Variable to determine if mouse is pressed
+
       boolIfPressed = true;
       
       // Changes the color of cell based on mousepressed location
@@ -214,7 +217,7 @@ public class Sketch extends PApplet {
               cellsSelected ++;
 
             }
-            else if ( row < (intRowCount-1) && intGrid[column][row+1] == 1 ){
+            else if (row < (intRowCount-1) && intGrid[column][row+1] == 1 ){
               intGrid[column][row + 1] = 0;
               cellsSelected --;
 
